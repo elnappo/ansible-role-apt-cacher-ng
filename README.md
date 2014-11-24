@@ -41,6 +41,19 @@ Replace server IP/FQDN!
 
 	$ echo "Acquire::http { Proxy "http://127.0.0.1:3142"; };" > /etc/apt/apt.conf.d/01proxy
 
+## Import localhost cache
+
+	$ echo "Acquire::http { Proxy "http://localhost:3142"; };" > /etc/apt/apt.conf.d/01proxy
+	$ apt-get update
+	$ apt-get autoclean
+	$ mkdir -p /var/cache/apt-cacher-ng/_import
+	$ ln -s /var/cache/apt /var/cache/apt-cacher-ng/_import/apt
+	$ wget "http://localhost:3142/acng-report.html?abortOnErrors=aOe&doImport=Start+Import&calcSize=cs&asNeeded=an#bottom"
+	
+After the import has finished, you can remove the symlink with:
+
+	$ rm /var/cache/apt-cacher-ng/_import/apt
+
 ## License
 
 MIT
