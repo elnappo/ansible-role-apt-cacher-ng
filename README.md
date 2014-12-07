@@ -7,7 +7,7 @@ Simply installs and start apt-cacher-ng on boot. Get more informations about apt
 Ubuntu or Debian
 
 ## Role Variables
-None.
+`apt-cacher-ng_setup_ufw: True`: Add a ufw rule to allow port 3142 for apt-cacher-ng
 
 ## Dependencies
 None.

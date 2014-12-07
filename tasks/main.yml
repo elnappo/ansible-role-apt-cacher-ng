@@ -7,3 +7,7 @@
 - name: Enable apt-cacher-ng on boot
   service: name=apt-cacher-ng state=started enabled=yes
   when: aptcacherng_install|success
+
+- name: Allow apt-cacher-ng on port 3142 (Firewall)
+  ufw: rule=allow port=3142 proto=tcp
+  when: aptcacherng_install|success and apt-cacher-ng_setup_ufw

@@ -1,0 +1,3 @@
+---
+# defaults file for apt-cacher-ng
+apt-cacher-ng_setup_ufw: True
