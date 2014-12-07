@@ -2,12 +2,10 @@
 # tasks file for apt-cacher-ng
 - name: Install apt-cacher-ng
   apt: name=apt-cacher-ng state=latest update_cache=yes
-  register: aptcacherng_install
 
 - name: Enable apt-cacher-ng on boot
   service: name=apt-cacher-ng state=started enabled=yes
-  when: aptcacherng_install|success
 
 - name: Allow apt-cacher-ng on port 3142 (Firewall)
   ufw: rule=allow port=3142 proto=tcp
-  when: aptcacherng_install|success and apt-cacher-ng_setup_ufw
+  when: apt-cacher-ng_setup_ufw
