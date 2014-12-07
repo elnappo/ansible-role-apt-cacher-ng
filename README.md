@@ -15,7 +15,7 @@ None.
 ## Example Playbook
     - hosts: servers
       roles:
-         - { role: elnappo.apt-cacher-ng }
+         - { role: elnappoo.apt-cacher-ng }
 
 ## Client configuration
 ### with ansible
