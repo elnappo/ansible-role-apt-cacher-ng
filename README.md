@@ -25,16 +25,17 @@ Set apt_proxy as a host var
 
 	- name: Set up apt proxy
   	  template: src=templates/apt_proxy.conf dest=/etc/apt/apt.conf.d/01proxy owner=root group=root mode=0644
- 	  when: ansible_os_family == "Debian" and apt_proxy
+ 	  when: ansible_os_family == "Debian" and apt_proxy is defined
  	  
 templates/apt_proxy.conf:
 
-	Acquire::http { Proxy "http://{{apt_proxy}}"; };
+	Acquire::http { Proxy "http://{{ apt_proxy }}"; };
 
 **Only for one task:**
 
-	- apt: name=cobbler state=installed
-	  environment: apt_proxy
+	- apt: name=ufw state=installed
+	  environment: 
+	    http_proxy: apt_proxy
       
 ### without ansible
 Replace server IP/FQDN!
