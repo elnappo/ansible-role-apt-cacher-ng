@@ -8,4 +8,4 @@
 
 - name: Allow apt-cacher-ng on port 3142 (Firewall)
   ufw: rule=allow port=3142 proto=tcp
-  when: apt-cacher-ng_setup_ufw
+  when: apt_cacher_ng_setup_ufw
