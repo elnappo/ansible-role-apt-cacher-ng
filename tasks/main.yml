@@ -6,6 +6,15 @@
 - name: Enable apt-cacher-ng on boot
   service: name=apt-cacher-ng state=started enabled=yes
 
-- name: Allow apt-cacher-ng on port 3142 (Firewall)
-  ufw: rule=allow port=3142 proto=tcp
+- name: Create CacheDir
+  file: path={{ apt_cacher_ng_cache_dir }} owner=root group=root mode=755 state=directory
+
+- name: Set config
+  lineinfile: dest=/etc/apt-cacher-ng/acng.conf regexp={{ item.regexp | default(omit) }} line="{{ item.line }}" state={{ item.state | default("present") }}
+  with_items:
+    - { regexp: "^Port:", line: "Port: {{ apt_cacher_ng_port }}" }
+    - { regexp: "^CacheDir:\ ", line: "CacheDir: {{ apt_cacher_ng_cache_dir }}" }
+
+- name: Allow apt-cacher-ng (Firewall)
+  ufw: rule=allow port={{ apt_cacher_ng_port }} proto=tcp
   when: apt_cacher_ng_setup_ufw

@@ -6,7 +6,9 @@ Simply installs and start apt-cacher-ng on boot. Get more informations about apt
 Ubuntu or Debian
 
 ## Role Variables
-`apt-cacher-ng_setup_ufw: True`: Add a ufw rule to allow port 3142 for apt-cacher-ng
+`apt_cacher_ng_port: 3142`
+`apt_cacher_ng_cache_dir: /var/cache/apt-cacher-ng`
+`apt_cacher_ng_setup_ufw: True` Add a ufw rule to allow apt-cacher-ng
 
 ## Dependencies
 None.
@@ -34,7 +36,7 @@ templates/apt_proxy.conf:
 
 	- apt: name=ufw state=installed
 	  environment: 
-	    http_proxy: apt_proxy
+	    http_proxy: "{{ apt_proxy }}"
       
 ### without ansible
 Replace server IP/FQDN!
