@@ -20,7 +20,6 @@ script:
   - curl http://localhost:3142
   - http_proxy=http://127.0.0.1:3142 sudo apt-get update
 after_script:
-  - apt-cacher-ng -p
-  - cat /var/cache/apt-cacher-ng
+  - cat /etc/apt-cacher-ng/acng.conf
   - cat /var/log/apt-cacher-ng/apt-cacher.err
   - cat /var/log/apt-cacher-ng/apt-cacher.log
