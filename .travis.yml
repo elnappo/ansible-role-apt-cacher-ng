@@ -18,8 +18,8 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
   - curl http://localhost:3142
-  - sudo echo "Acquire::http { Proxy "http://127.0.0.1:3142"; };" > /etc/apt/apt.conf.d/01proxy
-  - sudo apt-get update -qq & sudo apt-get upgrade -qq
+  - http_proxy=http://127.0.0.1:3142 sudo apt-get update
+  - http_proxy=http://127.0.0.1:3142 sudo apt-get upgrade -y
 after_script:
   - apt-cacher-ng -p
   - cat /var/cache/apt-cacher-ng
