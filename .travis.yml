@@ -19,7 +19,6 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
   - curl http://localhost:3142
   - http_proxy=http://127.0.0.1:3142 sudo apt-get update
-  - http_proxy=http://127.0.0.1:3142 sudo apt-get upgrade -y
 after_script:
   - apt-cacher-ng -p
   - cat /var/cache/apt-cacher-ng
