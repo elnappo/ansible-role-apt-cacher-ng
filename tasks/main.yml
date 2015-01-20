@@ -7,7 +7,7 @@
   service: name=apt-cacher-ng state=started enabled=yes
 
 - name: Create CacheDir
-  file: path={{ apt_cacher_ng_cache_dir }} owner=root group=root mode=755 state=directory
+  file: path={{ apt_cacher_ng_cache_dir }} owner=apt-cacher-ng group=apt-cacher-ng mode=755 state=directory
 
 - name: Set config
   lineinfile: dest=/etc/apt-cacher-ng/acng.conf regexp={{ item.regexp | default(omit) }} line="{{ item.line }}" state={{ item.state | default("present") }}
