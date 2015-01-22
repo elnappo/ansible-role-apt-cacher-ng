@@ -10,7 +10,7 @@
   file: path={{ apt_cacher_ng_cache_dir }} owner=apt-cacher-ng group=apt-cacher-ng mode=755 state=directory
 
 - name: Set config
-  lineinfile: dest=/etc/apt-cacher-ng/acng.conf regexp={{ item.regexp | default(omit) }} line="{{ item.line }}" state={{ item.state | default("present") }}
+  lineinfile: dest=/etc/apt-cacher-ng/acng.conf regexp={{ item.regexp }} line="{{ item.line }}" state={{ item.state | default("present") }}
   with_items:
     - { regexp: "^Port:", line: "Port: {{ apt_cacher_ng_port }}" }
     - { regexp: "^CacheDir:\ ", line: "CacheDir: {{ apt_cacher_ng_cache_dir }}" }
