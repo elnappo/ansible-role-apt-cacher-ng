@@ -17,9 +17,11 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
-  - curl http://localhost:3142
-  - http_proxy=http://127.0.0.1:3142 sudo apt-get update
+  - curl http://localhost:1337
+  - http_proxy=http://127.0.0.1:1337 sudo apt-get update
+  - http_proxy=http://127.0.0.1:1337 sudo apt-get install -qq cowsay
 after_script:
   - cat /etc/apt-cacher-ng/acng.conf
   - cat /var/log/apt-cacher-ng/apt-cacher.err
   - cat /var/log/apt-cacher-ng/apt-cacher.log
+  - ls -la /var/cache/travis-apt-cacher-ng/
