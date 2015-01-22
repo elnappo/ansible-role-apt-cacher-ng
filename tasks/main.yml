@@ -3,9 +3,6 @@
 - name: Install apt-cacher-ng
   apt: name=apt-cacher-ng state=latest update_cache=yes cache_valid_time=3600
 
-- name: Enable apt-cacher-ng on boot
-  service: name=apt-cacher-ng state=started enabled=yes
-
 - name: Create CacheDir
   file: path={{ apt_cacher_ng_cache_dir }} owner=apt-cacher-ng group=apt-cacher-ng mode=755 state=directory
 
@@ -14,6 +11,11 @@
   with_items:
     - { regexp: "^Port:", line: "Port: {{ apt_cacher_ng_port }}" }
     - { regexp: "^CacheDir:\ ", line: "CacheDir: {{ apt_cacher_ng_cache_dir }}" }
+  notify:
+    - restart apt-cacher-ng
+
+- name: Enable apt-cacher-ng on boot
+  service: name=apt-cacher-ng state=started enabled=yes
 
 - name: Allow apt-cacher-ng (Firewall)
   ufw: rule=allow port={{ apt_cacher_ng_port }} proto=tcp
