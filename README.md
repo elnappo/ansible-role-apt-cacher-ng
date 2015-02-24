@@ -14,30 +14,40 @@ Ubuntu or Debian
 None.
 
 ## Example Playbook
-    - hosts: servers
-      roles:
-         - { role: elnappoo.apt-cacher-ng }
+
+```yaml
+- hosts: servers
+  roles:
+   - { role: elnappoo.apt-cacher-ng }
+```
 
 ## Client configuration
 ### with ansible
 Set apt_proxy as a host var
 
+	[host:vars]
+	apt_proxy=apt.example.com:3142
+	
 **For the whole system:**
 
-	- name: Set up apt proxy
-  	  template: src=templates/apt_proxy.conf dest=/etc/apt/apt.conf.d/01proxy owner=root group=root mode=0644
- 	  when: ansible_os_family == "Debian" and apt_proxy is defined
- 	  
+```yaml
+- name: Set up apt proxy
+  template: src=templates/apt_proxy.conf dest=/etc/apt/apt.conf.d/01proxy owner=root group=root mode=0644
+    when: ansible_os_family == "Debian" and apt_proxy is defined
+```
+
 templates/apt_proxy.conf:
 
 	Acquire::http { Proxy "http://{{ apt_proxy }}"; };
 
 **Only for one task:**
 
-	- apt: name=ufw state=installed
-	  environment: 
-	    http_proxy: "{{ apt_proxy }}"
-      
+```yaml
+- apt: name=ufw state=installed
+  environment: 
+    http_proxy: "{{ apt_proxy }}"
+```       
+
 ### without ansible
 Replace server IP/FQDN!
 
