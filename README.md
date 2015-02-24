@@ -41,11 +41,11 @@ templates/apt_proxy.conf:
 ### without ansible
 Replace server IP/FQDN!
 
-	$ echo "Acquire::http { Proxy "http://127.0.0.1:3142"; };" > /etc/apt/apt.conf.d/01proxy
+	$ echo 'Acquire::http { Proxy "http://127.0.0.1:3142"; };' > /etc/apt/apt.conf.d/01proxy
 
 ## Import localhost cache
 
-	$ echo "Acquire::http { Proxy "http://localhost:3142"; };" > /etc/apt/apt.conf.d/01proxy
+	$ echo 'Acquire::http { Proxy "http://localhost:3142"; };' > /etc/apt/apt.conf.d/01proxy
 	$ apt-get update
 	$ apt-get autoclean
 	$ mkdir -p /var/cache/apt-cacher-ng/_import

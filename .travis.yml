@@ -25,3 +25,4 @@ after_script:
   - cat /var/log/apt-cacher-ng/apt-cacher.err
   - cat /var/log/apt-cacher-ng/apt-cacher.log
   - ls -la /var/cache/travis-apt-cacher-ng/
+  - ls -la /var/cache/apt-cacher-ng
