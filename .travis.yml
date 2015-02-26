@@ -18,9 +18,8 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
   - curl http://localhost:1337
-  - sudo apt-get -o Acquire::http::proxy=http://localhost:1337 update
-  - sudo apt-get -o Acquire::http::proxy=http://localhost:1337 install -qq cowsay
 after_script:
+  - sudo apt-get -o Acquire::http::proxy=http://localhost:1337 update
   - ls -la /etc/apt-cacher-ng/
   - cat /etc/apt-cacher-ng/acng.conf
   - cat /var/log/apt-cacher-ng/apt-cacher.err
