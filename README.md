@@ -39,6 +39,7 @@ Set apt_proxy as a host var
 templates/apt_proxy.conf:
 
 	Acquire::http { Proxy "http://{{ apt_proxy }}"; };
+	Acquire::https { Proxy "https://"; };
 
 **Only for one task:**
 
