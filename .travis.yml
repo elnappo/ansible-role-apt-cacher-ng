@@ -9,7 +9,7 @@ before_install:
 install:
   - pip install ansible --upgrade
   - ansible --version
-  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
+  - printf '[defaults]\nroles_path=../' >ansible.cfg
   - echo localhost > inventory
 script:
   - ansible-playbook -i inventory --syntax-check --list-tasks test.yml
@@ -28,3 +28,5 @@ after_script:
   - cat /var/log/apt-cacher-ng/apt-cacher.log
   - ls -la /var/cache/travis-apt-cacher-ng/
   - ls -la /var/cache/apt-cacher-ng/
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

@@ -17,6 +17,7 @@ None.
 
 ```yaml
 - hosts: servers
+  remote_user: root
   roles:
    - { role: elnappoo.apt-cacher-ng }
 ```
@@ -73,4 +74,4 @@ MIT
 
 ## Author Information
 
-elnappo <elnappoo@gmail.com>
+elnappo <elnappo@nerdpol.io>
