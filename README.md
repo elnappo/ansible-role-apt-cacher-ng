@@ -1,4 +1,5 @@
-# ansible-role-apt-cacher-ng [![Build Status](https://travis-ci.org/elnappo/ansible-role-apt-cacher-ng.svg?branch=master)](https://travis-ci.org/elnappo/ansible-role-apt-cacher-ng)
+# ansible-role-apt-cacher-ng
+[![Build Status](https://travis-ci.org/elnappo/ansible-role-apt-cacher-ng.svg?branch=master)](https://travis-ci.org/elnappo/ansible-role-apt-cacher-ng) [![Ansible Galaxy](https://img.shields.io/badge/galaxy-elnappoo.apt--cacher--ng-blue.svg?style=flat)](https://galaxy.ansible.com/elnappoo/apt-cacher-ng/)
 
 Simply installs and start apt-cacher-ng on boot. Get more informations about apt-cacher-ng at https://www.unix-ag.uni-kl.de/~bloch/acng/
 
@@ -27,7 +28,7 @@ None.
 Set apt_proxy as a host var
 
 	[host:vars]
-	apt_proxy=apt.example.com:3142
+	apt_proxy=http://apt.example.com:3142/
 	
 **For the whole system:**
 
@@ -39,7 +40,8 @@ Set apt_proxy as a host var
 
 templates/apt_proxy.conf:
 
-	Acquire::http { Proxy "http://{{ apt_proxy }}"; };
+	# {{ ansible_managed }}
+	Acquire::http { Proxy "{{ apt_proxy }}"; };
 	Acquire::https { Proxy "https://"; };
 
 **Only for one task:**
@@ -53,7 +55,7 @@ templates/apt_proxy.conf:
 ### without ansible
 Replace server IP/FQDN!
 
-	$ echo 'Acquire::http { Proxy "http://127.0.0.1:3142"; };' > /etc/apt/apt.conf.d/01proxy
+	$ echo 'Acquire::http { Proxy "http://apt.example.com:3142"; };' > /etc/apt/apt.conf.d/01proxy
 
 ## Import localhost cache
 
