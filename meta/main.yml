@@ -3,16 +3,17 @@ galaxy_info:
   author: elnappo <elnappo@nerdpol.io>
   description: Install apt-cacher-ng
   license: MIT
-  min_ansible_version: 1.9
+  min_ansible_version: 2.1
   platforms:
   - name: Ubuntu
     versions:
-    - precise
     - trusty
+    - xenial
+    - bionic
   - name: Debian
     versions:
-    - wheezy
     - jessie
+    - stretch
   galaxy_tags:
   - packaging
   - apt
