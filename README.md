@@ -1,5 +1,5 @@
 # ansible-role-apt-cacher-ng
-[![Build Status](https://travis-ci.org/elnappo/ansible-role-apt-cacher-ng.svg?branch=master)](https://travis-ci.org/elnappo/ansible-role-apt-cacher-ng) [![Ansible Galaxy](https://img.shields.io/badge/galaxy-elnappoo.apt--cacher--ng-blue.svg?style=flat)](https://galaxy.ansible.com/elnappoo/apt-cacher-ng/)
+[![Build Status](https://travis-ci.org/elnappo/ansible-role-apt-cacher-ng.svg?branch=master)](https://travis-ci.org/elnappo/ansible-role-apt-cacher-ng) [![Ansible Galaxy](https://img.shields.io/badge/galaxy-elnappo.apt--cacher--ng-blue.svg?style=flat)](https://galaxy.ansible.com/elnappo/apt-cacher-ng/)
 
 Simply installs and start apt-cacher-ng on boot. Get more informations about apt-cacher-ng at https://www.unix-ag.uni-kl.de/~bloch/acng/
 
@@ -20,7 +20,7 @@ None.
 - hosts: servers
   remote_user: root
   roles:
-   - { role: elnappoo.apt-cacher-ng }
+   - { role: elnappo.apt-cacher-ng }
 ```
 
 ## Client configuration
@@ -29,7 +29,7 @@ Set apt_proxy as a host var
 
 	[host:vars]
 	apt_proxy=http://apt.example.com:3142/
-	
+
 **For the whole system:**
 
 ```yaml
@@ -48,9 +48,9 @@ templates/apt_proxy.conf:
 
 ```yaml
 - apt: name=ufw state=installed
-  environment: 
+  environment:
     http_proxy: "{{ apt_proxy }}"
-```       
+```
 
 ### without ansible
 Replace server IP/FQDN!
@@ -65,7 +65,7 @@ Replace server IP/FQDN!
 	$ mkdir -p /var/cache/apt-cacher-ng/_import
 	$ ln -s /var/cache/apt /var/cache/apt-cacher-ng/_import/apt
 	$ wget "http://localhost:3142/acng-report.html?abortOnErrors=aOe&doImport=Start+Import&calcSize=cs&asNeeded=an#bottom"
-	
+
 After the import has finished, you can remove the symlink with:
 
 	$ rm /var/cache/apt-cacher-ng/_import/apt
