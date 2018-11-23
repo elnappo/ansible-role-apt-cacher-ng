@@ -20,7 +20,7 @@ None.
 - hosts: servers
   remote_user: root
   roles:
-   - { role: elnappo.apt-cacher-ng }
+   - { role: elnappo.apt_cacher_ng }
 ```
 
 ## Client configuration
