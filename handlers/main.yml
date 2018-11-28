@@ -1,5 +1,6 @@
 ---
 # handlers file for apt-cacher-ng
 - name: restart apt-cacher-ng
-  service: name=apt-cacher-ng state=restarted
-  
+  service:
+    name: apt-cacher-ng
+    state: restarted
