@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: ansible-role-apt-cacher-ng
+      apt_cacher_ng_port: 1337
+      apt_cacher_ng_cache_dir: /var/cache/travis-apt-cacher-ng

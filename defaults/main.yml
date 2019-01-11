@@ -2,4 +2,4 @@
 # defaults file for apt-cacher-ng
 apt_cacher_ng_port: 3142
 apt_cacher_ng_cache_dir: /var/cache/apt-cacher-ng
-apt_cacher_ng_setup_ufw: True
+apt_cacher_ng_setup_ufw: true

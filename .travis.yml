@@ -1,32 +1,20 @@
 ---
-sudo: required
-dist: xenial
 language: python
-python: "2.7"
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq python-apt python-pycurl curl ufw
+services: docker
+
+env:
+  matrix:
+    - MOLECULE_DISTRO: ubuntu1404
+    - MOLECULE_DISTRO: ubuntu1604
+    - MOLECULE_DISTRO: ubuntu1804
+    - MOLECULE_DISTRO: debian8
+    - MOLECULE_DISTRO: debian9
+
 install:
-  - pip install ansible --upgrade
-  - ansible --version
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
-  - echo localhost > inventory
+  - pip install molecule docker
+
 script:
-  - ansible-playbook -i inventory --syntax-check --list-tasks test.yml
-  - ansible-playbook -i inventory --connection=local --become -vvvv test.yml
-  - >
-    ansible-playbook -i inventory --connection=local --become test.yml
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-  - curl http://localhost:1337
-after_script:
-  - sudo apt-get -o Acquire::http::proxy=http://localhost:1337 update
-  - ls -la /etc/apt-cacher-ng/
-  - cat /etc/apt-cacher-ng/acng.conf
-  - cat /var/log/apt-cacher-ng/apt-cacher.err
-  - cat /var/log/apt-cacher-ng/apt-cacher.log
-  - ls -la /var/cache/travis-apt-cacher-ng/
-  - ls -la /var/cache/apt-cacher-ng/
+  - molecule test
+
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

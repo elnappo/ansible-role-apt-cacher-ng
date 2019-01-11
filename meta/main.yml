@@ -5,17 +5,17 @@ galaxy_info:
   license: MIT
   min_ansible_version: 2.2
   platforms:
-  - name: Ubuntu
-    versions:
-    - trusty
-    - xenial
-    - bionic
-  - name: Debian
-    versions:
-    - jessie
-    - stretch
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+        - bionic
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
   galaxy_tags:
-  - packaging
-  - apt
+    - packaging
+    - apt
 
 dependencies: []

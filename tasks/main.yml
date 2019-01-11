@@ -1,11 +1,9 @@
 ---
 # tasks file for apt-cacher-ng
 - name: Install apt-cacher-ng
-  apt:
+  package:
     name: apt-cacher-ng
     state: present
-    update_cache: yes
-    cache_valid_time: 3600
 
 - name: Create CacheDir
   file:
@@ -38,7 +36,7 @@
   service:
     name: apt-cacher-ng
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Allow apt-cacher-ng (Firewall)
   ufw:
